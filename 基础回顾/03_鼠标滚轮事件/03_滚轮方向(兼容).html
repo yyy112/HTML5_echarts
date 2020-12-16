@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        #wrap{
+            position:absolute;
+            left:0;
+            top:0;
+            right:0;
+            bottom:0;
+            margin:auto;
+            width:200px;
+            height:200px;
+            background: pink;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap"></div>
+</body>
+<script>
+    window.onload = function(){
+        var wrap = document.querySelector("#wrap");
+        // 除火狐以外的浏览器
+        wrap.onmousewheel = fn;
+        // 火狐
+        if(wrap.addEventListener){
+            wrap.addEventListener("DomMousescroll",fn)
+        }
+        
+        function fn(ev){
+            ev = ev || event;
+            var dir = "";
+            if(ev.wheelDelta){
+                dir = ev.wheelDelta > 0?"up":"down";
+            }
+            if(ev.detail){
+                dir = ev.detail < 0?"up":"down";
+            }
+            console.log(dir)
+        }
+    }
+</script>
+</html>

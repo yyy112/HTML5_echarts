@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>li<a href="javascript:;">删除</a></li>
+        <li>li1<a href="javascript:;">删除</a></li>
+        <li>li11<a href="javascript:;">删除</a></li>
+        <li>li111<a href="javascript:;">删除</a></li>
+        <li>li1111<a href="javascript:;">删除</a></li>
+    </ul>
+</body>
+<script>
+    window.onload = function(){
+        var aNodes = document.querySelectorAll("a");
+        for(var i=0 ; i<aNodes.length ; i++){
+            // 假删除
+            aNodes[i].onclick = function(){
+                this.parentNode.style.display = "none";
+            }
+        }
+    }
+</script>
+</html>

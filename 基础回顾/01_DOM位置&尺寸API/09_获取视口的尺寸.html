@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #wrap{
+            width:200px;
+            height:200px;
+            padding:50px;
+            border:10px solid;
+            margin:60px;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">wrap
+        
+    </div>
+</body>
+<script>
+    window.onload=function(){
+        // document.documentElement.clientWidth代表的并不是根标签的可视区域，就是视口的大小
+        var w = document.documentElement.clientWidth;
+        // document.documentElement.offsetWidth   根标签的border-box
+        var w2 = document.documentElement.offsetWidth;
+        var h = document.documentElement.clientHeight;
+
+        console.log(w,w2)
+
+        /*
+        注意
+                在ie10及ie10以下，根标签的clientWidth和offsetWidth
+                                统一被指定为视口的宽度
+        */
+        
+    }
+</script>
+</html>

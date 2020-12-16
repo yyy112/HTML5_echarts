@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* css reset 开始 */
+        html,body{height:100%;overflow:hidden;}
+        html,body,p,ul,h1,h2,h3,h4,h5,h6,li{margin:0;padding:0;font:14px "微软雅黑";}
+        a{display:block;text-decoration:none;}
+        li{list-style:none;}
+        img{display:block;}
+        /* css reset 结束 */
+        /* common css 开始 */
+        .clearfix{*zoom:1;}
+        .clearfix:after{content:"";display:block;clear:both;}
+        .commonTitle{ color:#009ee0; font-size:80px; line-height:0.8;font-weight:bold; letter-spacing:-5px;}
+        .commonText{ color:white; line-height:1.5; font-size:15px;}
+        /* common css 结束 */
+
+        /* 头部 css 开始  */
+        #wrap{width:100%;height:100%;}
+        #head{width:100%;}
+        #head > .headMain{position:relative;width:1100px;height:80px;margin:0 auto;}
+        #head > .headMain > h1,#head > .headMain > .nav li{float:left;}
+        #head > .headMain > h1{margin-top:30px;}
+        #head > .headMain > .nav{float:right;margin-top:50px;}
+        #head > .headMain > .nav li{margin-left:40px;position:relative;}
+        #head > .headMain > .nav li .up{position:absolute;top:0;width:0;overflow:hidden;color:#000;
+                                    transition:1s width;}
+        #head > .headMain > .nav li:hover .up{width:100%;}
+        #head > .headMain > .arrow{width:21px;height:11px;position:absolute;bottom:-11px;left:50%;transition:1s left;z-index:1;}
+        /* 头部 css 结束  */
+
+        /* 内容 css 开始  */
+       #content{width:100%;position:relative;overflow:hidden;}
+       #content > .list{width:100%;position:absolute;top:0;left:0;}
+       #content > .list > li{width:100%;position:relative;}
+       #content > .list > li > section{position:absolute;width:1100px;height:520px;
+                                left:0;right:0;top:0;bottom:0;margin:auto;}
+       
+        /* 小圆点 css 开始 */
+        #content > .dot > .list{position:absolute;right:10px;top:35%;}
+        #content > .dot > .list > li{width:10px;height:10px;border:8px solid rgba(6, 6, 155, 0.3);border-radius:50%;margin-top:3px;}
+        #content > .dot > .list > li.active{background: #fff;}
+        /* 小圆点 css 结束 */
+        /* 第三屏 css 开始 */
+        #content > .list > .works{background: url(./img/bg3.jpg) no-repeat;}
+        #content > .list > .works .works1{margin:50px 0px 100px 50px;}
+        
+        #content > .list > .works .works2{margin-left:50px;}
+        #content > .list > .works .works2 li{float:left;position:relative;margin:0 1px;overflow:hidden;}
+        #content > .list > .works .works2 li > div{position:absolute;left:0;right:0;top:0;bottom:0;background: rgba(0,0,0,.7);
+                                                color:white;opacity:0;transition:1s opacity;}
+        #content > .list > .works .works2 li > img{transition:1s transform;}
+        #content > .list > .works .works2 li > div > p{margin:15px;}
+        #content > .list > .works .works2 li > div > .icon{width:32px;height:34px;background: url(./img/zoomico.png) no-repeat;
+                                                    margin:10px auto;}
+        #content > .list > .works .works2 li > div > .icon:hover{background-position: 0 -36px;}
+        #content > .list > .works .works2 li:hover div{opacity:1;}
+        #content > .list > .works .works2 li:hover img{transform:scale(1.5) rotate(30deg);}
+
+        #content > .list > .works .works3{width:167px;height:191px;background: url(./img/robot.png) no-repeat;
+                                        position:absolute;left:900px;top:170px;animation:move 4s linear infinite}
+        @keyframes move {
+            0%{transform:translateX(0px) rotateY(0deg);}
+            49%{transform:translateX(-499px) rotateY(0deg);}
+            50%{transform:translateX(-500px) rotateY(180deg);}
+            100%{transform:translateX(0px) rotateY(180deg);}
+        }
+        /* 第三屏 css 结束 */
+
+        /* 第二屏 css 开始 */
+        #content > .list > .course{background: url(./img/bg2.jpg) no-repeat;}
+        #content > .list > .course .course1{margin:50px;}
+        #content > .list > .course .course2{width:400px;margin-left:50px;}
+        #content > .list > .course .course3{position:absolute;width:480px;top:70px;right:50px;}
+
+        #content > .list > .course .course3 > .line{position:absolute;top:-7px;left:-5px;width:9px;height:410px;background: url(./img/plus_row.png) no-repeat;}
+        #content > .list > .course .course3 > .line:nth-of-type(1){left:-5px;}
+        #content > .list > .course .course3 > .line:nth-of-type(2){left:115px;}
+        #content > .list > .course .course3 > .line:nth-of-type(3){left:235px;}
+        #content > .list > .course .course3 > .line:nth-of-type(4){left:355px;}
+        #content > .list > .course .course3 > .line:nth-of-type(5){left:475px;}
+
+        #content > .list > .course .course3 li{float:left;width:120px;height:132px;perspective:500px;transform-style:preserve-3d;}
+        #content > .list > .course .course3 li > .faceback,#content > .list > .course .course3 li > .face{position:absolute;left:0;right:0;
+                                                top:0;bottom:0;box-sizing:border-box;padding:15px;transition:1s transform;}
+        
+        #content > .list > .course .course3 li > .face{background-position: 50% 50%!important;}
+        #content > .list > .course .course3 li:nth-child(1) .face{background: url(./img/bks.png) no-repeat;}
+        #content > .list > .course .course3 li:nth-child(2) .face{background: url(./img/bks.png) no-repeat;}
+        #content > .list > .course .course3 li:nth-child(3) .face{background: url(./img/gu.png) no-repeat;}
+        #content > .list > .course .course3 li:nth-child(4) .face{background: url(./img/hlx.png) no-repeat;}
+        #content > .list > .course .course3 li:nth-child(5) .face{background: url(./img/lbs.png) no-repeat;}
+        #content > .list > .course .course3 li:nth-child(6) .face{background: url(./img/leonberg.png) no-repeat;}
+        #content > .list > .course .course3 li:nth-child(7) .face{background: url(./img/pcwelt.png) no-repeat;}
+        #content > .list > .course .course3 li:nth-child(8) .face{background: url(./img/tata.png) no-repeat;}
+        #content > .list > .course .course3 li:nth-child(9) .face{background: url(./img/bks.png) no-repeat;}
+        #content > .list > .course .course3 li:nth-child(10) .face{background: url(./img/lbs.png) no-repeat;}
+        #content > .list > .course .course3 li:nth-child(11) .face{background: url(./img/bks.png) no-repeat;}
+        #content > .list > .course .course3 li:nth-child(12) .face{background: url(./img/lbs.png) no-repeat;}
+        #content > .list > .course .course3 li > .faceback{transform:rotateY(180deg);background: #009ee0;color:white;backface-visibility: hidden;}
+        #content > .list > .course .course3 li:hover .faceback{transform:rotateY(360deg);}
+        #content > .list > .course .course3 li:hover .face{transform:rotateY(180deg);}       
+        /* 第二屏 css 结束 */
+        /* 第四屏 css 开始 */
+        #content > .list > .about{background: url(./img/bg4.jpg) no-repeat;}
+        #content > .list > .about .about1{margin:50px 0px 100px 50px;}
+        #content > .list > .about .about2{width:400px;margin-left:50px;}
+        #content > .list > .about .about4{position:absolute;top:-30px;right:200px;width:357px;height:998px;background: url(./img/greenLine.png);}
+        #content > .list > .about .about3 > .item{width:260px;height:200px;position:absolute;background: pink;z-index:2;
+                                            border:5px solid rgba(255,255,255,0.5);border-radius:8px;overflow:hidden;}
+        #content > .list > .about .about3 > .item:nth-child(1){left:750px;top:50px;}
+        #content > .list > .about .about3 > .item:nth-child(2){left:600px;top:290px;}
+        #content > .list > .about .about3 > .item span{position:absolute;left:0;top:0;width:100%;height:100%;transition:1s transform;}
+        #content > .list > .about .about3 > .item:nth-child(1) span{background: url(./img/about2.jpg) no-repeat;transform:scale(1.5);}
+        #content > .list > .about .about3 > .item:nth-child(2) span{background: url(./img/about4.jpg) no-repeat;transform:scale(1.5);}
+        #content > .list > .about .about3 > .item:hover span{transform:scale(1);}
+        #content > .list > .about .about3 > .item > ul{height:100%;}
+        #content > .list > .about .about3 > .item > ul > li{position:relative;float:left;overflow:hidden;}
+        #content > .list > .about .about3 > .item > ul > li > img{position:absolute;transition:1s left,1s top;}
+        /* 第四屏 css 结束 */
+
+        /* 第五屏 css 开始 */
+        #content > .list > .team{background: url(./img/bg5.jpg) no-repeat;}
+        #content > .list > .team .team1{margin:50px;float:left;}
+        #content > .list > .team .team2{width:400px;margin:50px;float:right;}
+        #content > .list > .team .team3{width:944px;height:448px;position:absolute;top:250px;margin-left:78px;}
+        #content > .list > .team .team3 > .list{height:100%;width:100%;}
+        #content > .list > .team .team3 > .list > li{width:118px;height:100%;background: url(./img/team.png) no-repeat;float:left;transition:1s opacity;} 
+        #content > .list > .team .team3 > .list > li:nth-child(1){background-position: 0 0;}
+        #content > .list > .team .team3 > .list > li:nth-child(2){background-position: -118px 0;}
+        #content > .list > .team .team3 > .list > li:nth-child(3){background-position: -236px 0;}
+        #content > .list > .team .team3 > .list > li:nth-child(4){background-position: -354px 0;}
+        #content > .list > .team .team3 > .list > li:nth-child(5){background-position: -472px 0;}
+        #content > .list > .team .team3 > .list > li:nth-child(6){background-position: -590px 0;}
+        #content > .list > .team .team3 > .list > li:nth-child(7){background-position: -708px 0;}
+        #content > .list > .team .team3 > .list > li:nth-child(8){background-position: -822px 0;}
+        /* 第五屏 css 结束*/
+        #content > .list > .home{background: url(./img/bg1.jpg) no-repeat;}
+       
+        
+        
+        
+        /* 内容 css 结束  */
+
+    </style>
+</head>
+<body>
+    <div id="wrap">
+         <header id="head">
+             <div class="headMain">
+                 <h1>
+                     <a href="javascript:;">
+                         <img src="./img/logo.png">
+                     </a>
+                 </h1>
+                 <nav class="nav">
+                     <ul class="list">
+                        <li>
+                            <a href="javascript:;">
+                                <div class="down"><img src="./img/home.png" alt=""></div>
+                                <div class="up"><img src="./img/home_gruen.png" alt=""></div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:;">
+                                <div class="down">Course</div>
+                                <div class="up">Course</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:;">
+                                <div class="down">Works</div>
+                                <div class="up">Works</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:;">
+                                <div class="down">About</div>
+                                <div class="up">About</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:;">
+                                <div class="down">Team</div>
+                                <div class="up">Team</div>
+                            </a>
+                        </li>
+                     </ul>
+                 </nav>
+                 <div class="arrow">
+                     <img src="./img/menuIndicator.png">
+                 </div>
+             </div>
+         </header>
+         <section id="content">
+            <ul class="list">
+                <li class="home">
+                    <section>
+                        home
+                    </section>
+                </li>
+                <li class="course">
+                    <section>
+                        <div class="course1">
+                            <p class="commonTitle">EINIGE</p>
+                            <p class="commonTitle">UNSERER</p>
+                            <p class="commonTitle">KUNDEN</p>
+                        </div>
+                        <div class="course2">
+                            <p class="commonText">Das Kundenvertrauen in unsere Kompetenz ist die notwendige Basis einer erfolgreichen Zusammenarbeit, gleichzeitig aber auch das größte Lob, das man uns entgegenbringen kann.</p>
+                            <p class="commonText">Diese und viele weitere große und kleine Kunden vertrauen uns seit Jahren, was uns stolz macht, und dafür sagen wir an dieser Stelle einfach mal.</p>
+                        </div>
+                        <div class="course3">
+                            <span class="line"></span>
+                            <span class="line"></span>
+                            <span class="line"></span>
+                            <span class="line"></span>
+                            <span class="line"></span>
+                            <ul class="list clearfix">
+                                <li>
+                                    <div class="faceback">我是测试文字</div>
+                                    <div class="face"></div>
+                                </li>
+                                <li>
+                                    <div class="faceback">我是测试文字</div>
+                                    <div class="face"></div>
+                                </li>
+                                <li>
+                                    <div class="faceback">我是测试文字</div>
+                                    <div class="face"></div>
+                                </li>
+                                <li>
+                                    <div class="faceback">我是测试文字</div>
+                                    <div class="face"></div>
+                                </li>
+                                <li>
+                                    <div class="faceback">我是测试文字</div>
+                                    <div class="face"></div>
+                                </li>
+                                <li>
+                                    <div class="faceback">我是测试文字</div>
+                                    <div class="face"></div>
+                                </li>
+                                <li>
+                                    <div class="faceback">我是测试文字</div>
+                                    <div class="face"></div>
+                                </li>
+                                <li>
+                                    <div class="faceback">我是测试文字</div>
+                                    <div class="face"></div>
+                                </li>
+                                <li>
+                                    <div class="faceback">我是测试文字</div>
+                                    <div class="face"></div>
+                                </li>
+                                <li>
+                                    <div class="faceback">我是测试文字</div>
+                                    <div class="face"></div>
+                                </li>
+                                <li>
+                                    <div class="faceback">我是测试文字</div>
+                                    <div class="face"></div>
+                                </li>
+                                <li>
+                                    <div class="faceback">我是测试文字</div>
+                                    <div class="face"></div>
+                                </li>
+                                
+                            </ul>
+                            
+                        </div>
+                    </section>
+                </li>
+                <li class="works">
+                    <section>
+                        <div class="works1">
+                            <p class="commonTitle">EINBLICK</p>
+                            <p class="commonTitle">ERKENNTNIS</p>
+                            <p class="commonTitle">ERGEBNIS</p>
+                        </div>
+                        <div class="works2">
+                            <ul class="list clearfix">
+                                <li>
+                                    <img src="./img/worksimg1.jpg">
+                                    <div>
+                                        <p>好好学习，天天向上</p>
+                                        <div class="icon"></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <img src="./img/worksimg2.jpg">
+                                    <div>
+                                        <p>好好学习，天天向上</p>
+                                        <div class="icon"></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <img src="./img/worksimg3.jpg">
+                                    <div>
+                                        <p>好好学习，天天向上</p>
+                                        <div class="icon"></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <img src="./img/worksimg4.jpg">
+                                    <div>
+                                        <p>好好学习，天天向上</p>
+                                        <div class="icon"></div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="works3"></div>
+                    </section>
+                </li>
+                <li class="about">
+                    <section>
+                        <div class="about1">
+                            <p class="commonTitle">DIE</p>
+                            <p class="commonTitle">SPEZIELLE</p>
+                            <p class="commonTitle">VIELFALT</p>
+                        </div>
+                        <div class="about2">
+                            <p class="commonText">Der bunte Medienmix ist die Faszination die uns antreibt und das, was man an uns schätzt. Von A bis Z und von vorne bis hinten nehmen wir Ihr Projekt unter unsere Fittiche und lassen es zu etwas Großartigem heranwachsen.</p>
+                        </div>
+                        <div class="about3">
+                            <div class="item">
+                                <span></span>
+                                <ul data-src="./img/about1.jpg"></ul>
+                            </div>
+                            <div class="item">
+                                <span></span>
+                                <ul data-src="./img/about3.jpg"></ul>
+                            </div>
+                        </div>
+                        <div class="about4"></div>
+                    </section>
+                </li>
+                <li class="team">
+                    <section>
+                        <div class="team1">
+                            <p class="commonTitle">WIR SIND</p>
+                            <p class="commonTitle">VOXELAIR</p>
+                        </div>
+                        <div class="team2">
+                            <p class="commonText">Wir sind seit 2002 eine Full-Service-Werbeagentur mit Stammsitz in Heimsheim, zwischen Stuttgart und Karlsruhe.</p>
+                            <p class="commonText">Über 60 Jahre Erfahrung vereinen das gesamte VoxelAir-Team. Dabei hat jedes Voxel neben professionellem Allroundwissen auch sein ganz spezielles Gebiet, um selbst die individuellsten Kundenwünsche schnell und kompetent umzusetzen.</p>
+                        </div>
+                        <div class="team3">
+                            <ul class="list">
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>                               
+                            </ul>
+                        </div>
+                    </section>
+                </li>
+            </ul>
+            <nav class="dot">
+                <ul class="list">
+                    <li class="active"></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </nav>
+         </section>
+    </div>
+</body>
+<script>
+    window.onload = function(){
+        var headMain = document.querySelector("#head > .headMain");
+        var arrow = document.querySelector("#head > .headMain > .arrow");
+        var hLiNodes = document.querySelectorAll("#head > .headMain > .nav li");
+        var upNodes = document.querySelectorAll("#head > .headMain > .nav li .up");
+        var firstUp = upNodes[0];
+        var firstLi = hLiNodes[0];
+
+        var content = document.querySelector("#content");
+        var cList = document.querySelector("#content > .list");
+        var cLiNodes = document.querySelectorAll("#content > .list > li");
+
+        var dotLiNodes = document.querySelectorAll("#content > .dot > .list > li");
+
+        var aboutUl = document.querySelectorAll("#content > .list > .about .about3 > .item > ul");
+        var teamLis = document.querySelectorAll("#content > .list > .team .team3 > .list > li");
+        var team3 = document.querySelector("#content > .list > .team .team3");
+
+
+        var now = 0;
+        var timer = 0;
+
+        var preIndex = 0;
+        // 第四屏交互
+
+        // 内容区交互
+        contentBind();
+        function contentBind(){
+            content.style.height = document.documentElement.clientHeight - headMain.offsetHeight + "px";
+            for(var i=0 ; i<cLiNodes.length ; i++){
+                cLiNodes[i].style.height = document.documentElement.clientHeight - headMain.offsetHeight + "px";
+            }     
+        }
+        
+        // 第五屏
+        biubiu();
+        function biubiu(){
+            var oc = null;
+            var time1 = 0;
+            var time2 = 0;
+            for(var i=0 ; i<teamLis.length ; i++){
+                teamLis[i].onmouseenter = function(){
+                    for(var i=0 ; i<teamLis.length ; i++){
+                        teamLis[i].style.opacity = ".2";
+                    }
+                    this.style.opacity = "1";
+                    addCavas();
+                    oc.style.left = this.offsetLeft + "px";
+                }
+            }
+            function addCavas(){
+                if(!oc){
+                    oc = document.createElement("canvas");
+                    oc.width = teamLis[0].offsetWidth;
+                    oc.height = teamLis[0].offsetHeight*2/3;
+
+                    oc.onmouseleave = function(){
+                        for(var i=0 ; i<teamLis.length ; i++){
+                            teamLis[i].style.opacity = "1";
+                        }   
+                        removeCavas();
+                    }
+                    team3.appendChild(oc);
+                    qiPao();
+                }
+
+            }
+            function qiPao(){
+                    if(oc.getContext){
+                        var ctx = oc.getContext("2d");
+
+                        var arr = [];
+                        // 将数组中的圆绘制到画布上
+                        time1 = setInterval(function(){
+                            ctx.clearRect(0,0,oc.width,oc.height);
+                            // 动画
+                            for(var i=0 ; i<arr.length ; i++){
+                                arr[i].deg += 5;4
+                                arr[i].x = arr[i].startX + Math.sin(arr[i].deg*Math.PI/180)*arr[i].step*2;
+                                arr[i].y = arr[i].startY - (arr[i].deg*Math.PI/180)*arr[i].step; 
+                                if(arr[i].y<=50){
+                                    arr.splice(i,1);
+                                }
+                            }
+
+                            // 绘制
+                            for(var i=0 ; i<arr.length ; i++){
+                                ctx.save();
+                                ctx.fillStyle = "rgba("+arr[i].red+","+arr[i].green+","+arr[i].blue+","+arr[i].alp+")";
+                                ctx.beginPath();
+                                ctx.arc(arr[i].x,arr[i].y,arr[i].r,0,360*Math.PI/180);
+                                ctx.fill();
+                                ctx.restore();
+                            }
+                        },1000/60)
+                        // 往arr中注入随机圆的信息
+                        time2 = setInterval(function(){
+                            var r = Math.round(Math.random()*8+2);
+                            var x = Math.round(Math.random()*oc.width);
+                            var y = oc.height - r;
+                            
+                            var red = Math.random()*255;
+                            var green = Math.random()*255;
+                            var blue = Math.random()*255;
+                            var alp = 1;
+
+                            var deg = 0;
+                            var startX = x;
+                            var startY = y;
+                            var step = Math.random()*20+10;
+
+                            arr.push({
+                                x:x,
+                                y:y,
+                                r:r,
+                                red:red,
+                                green:green,
+                                blue:blue,
+                                alp:alp,
+                                deg:deg,
+                                startX:startX,
+                                startY:startY,
+                                step:step
+
+                            });
+                        },50)
+                    }
+                }
+
+            function removeCavas(){
+                oc.remove();
+                oc = null;
+                clearInterval(time1);
+                clearInterval(time2);
+            }
+        }
+
+        // 第四屏图片炸裂
+        pcBoom();
+        function pcBoom(){
+            for(var i=0 ; i<aboutUl.length ; i++){
+                change(aboutUl[i]);
+            }
+
+            function change(Ul){
+                var src = Ul.dataset.src;
+                var w = Ul.offsetWidth/2;
+                var h = Ul.offsetHeight/2;
+                for(var i=0 ; i<4 ; i++){
+                    var lis = document.createElement("li");
+                    lis.style.width = w + "px";
+                    lis.style.height = h + "px";
+                    var img = document.createElement("img");
+                    /*
+                    1:-w  -h
+                    2:w   -h
+                    3:-w  h
+                    4:w  h
+                    */
+                    img.style.top = -Math.floor(i/2)*h + "px";
+                    img.style.left = -(i%2)*w + "px";
+                    img.src = src;
+
+                    lis.appendChild(img);
+                    Ul.appendChild(lis);
+                }
+                Ul.onmouseenter = function(){
+                    var img = this.querySelectorAll("li>img");
+                    img[0].style.top = h + "px";
+                    img[1].style.left = -2*w + "px";
+                    img[2].style.left = w + "px";
+                    img[3].style.top = -2*h + "px";
+                    
+                }
+                Ul.onmouseleave = function(){
+                    var img = this.querySelectorAll("li>img");
+                    img[0].style.top = 0 + "px";
+                    img[1].style.left = -w + "px";
+                    img[2].style.left = 0 + "px";
+                    img[3].style.top = -h + "px";
+                    
+                }
+            }
+        }
+
+        // 鼠标滚轮事件
+        if(content.addEventListener){
+            content.addEventListener("DomMouseScroll",function(ev){
+                ev = ev || event;
+                clearTimeout(timer);
+                timer = setTimeout(function(){
+                    fn(ev);
+                },200)
+            })
+        }
+        content.onmousewheel = function(ev){
+            ev = ev || event;
+            clearTimeout(timer);
+            timer = setTimeout(function(){
+                fn(ev);
+            },200)
+        }
+        function fn(ev){
+            ev = ev || event;
+            var dir = "";
+            if(ev.wheelDelta){
+                dir = ev.wheelDelta > 0 ? "up":"down";
+            }else if(ev.detail){
+                dir = ev.detail > 0 ? "down":"up";
+            }
+            switch (dir) {
+                case "up":
+                    if(now>0){
+                        now--;
+                        move(now);
+                    }
+                    break;
+                case "down":
+                    if(now<cLiNodes.length-1){
+                        now++;
+                        move(now);
+                    }
+                    break;
+            }
+        }
+
+        // 头部交互
+        headBind();
+        function headBind(){
+            firstUp.style.width = "100%";
+            arrow.style.left = firstLi.offsetLeft + firstLi.offsetWidth/2 - arrow.offsetWidth/2 + "px";
+            for(var i=0 ; i<hLiNodes.length ; i++){
+                hLiNodes[i].index = i;
+                hLiNodes[i].onclick = function(){
+                    // preIndex = now;
+                    move(this.index);
+                    now = this.index;
+                }
+            } 
+            for(var i=0 ; i<dotLiNodes.length ; i++){
+                dotLiNodes[i].index = i;
+                dotLiNodes[i].onclick = function(){
+                    // preIndex = now;
+                    move(this.index);
+                    now = this.index;
+                }
+            }
+        }
+
+        move(4);
+        function move(index){
+            for(var i=0 ; i<upNodes.length ; i++){
+                upNodes[i].style.width = "";
+            }
+            upNodes[index].style.width = "100%";
+            arrow.style.left = hLiNodes[index].offsetLeft + hLiNodes[index].offsetWidth/2 - arrow.offsetWidth/2 + "px";
+            cList.style.top = -index*(document.documentElement.clientHeight - headMain.offsetHeight) + "px";
+
+            for(var i=0 ; i<dotLiNodes.length ; i++){
+                dotLiNodes[i].className = "";
+            }
+            dotLiNodes[index].className = "active";
+        }
+    }
+</script>
+</html>

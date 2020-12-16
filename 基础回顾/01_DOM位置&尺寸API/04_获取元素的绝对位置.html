@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        html,body{
+            height:100%;
+            overflow:hidden;
+        }
+        #wrap{
+            position:absolute;
+            left:200px;
+            top:200px;
+            background: pink;
+        }
+        #inner1{
+            position:absolute;
+            left:150px;
+            top:150px;
+            background: deeppink;
+        }
+        div{
+            width:200px;
+            height:200px;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">wrap
+        <div id="inner1">inner1</div>
+    </div>
+</body>
+<script>
+    window.onload = function(){
+        /*
+        获取元素在页面中的绝对位置
+            绝对位置：到body的距离
+            相对位置：到视口的距离
+
+        本身定位为fixed
+                    ---->offsetParen：null（ie7以上（不是火狐））
+                    ---->offsetParent:body(火狐)
+        本身定位不为fixed
+                    父级没有定位
+                            ---->offsetParent:body
+                    父级有定位
+                            ---->offsetParent:定位父级
+        */
+
+        var inner1 = document.querySelector("#inner1");
+        var point = getPointAb(inner1);
+        console.log(point);
+
+        // border 和 margin会影响这个函数的取值
+        function getPointAb(node){
+            // while循环叠加offsetParen的offsetLeft 和 offsetTop
+            var x=0;
+            var y=0;
+            while(node){
+                x += node.offsetLeft;
+                y += node.offsetTop;
+
+                node = node.offsetParent;
+            }
+            return {x:x,y:y};
+        }
+    }
+</script>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        html,body{
+            height:100%;
+            overflow:hidden;
+            
+        }
+        #wrap{
+            position:absolute;
+            bottom:0;
+            width:100%;
+            text-align:center;
+        }
+        img{
+            width:64px;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <img src="./images/1.png">
+        <img src="./images/2.png">
+        <img src="./images/3.png">
+        <img src="./images/4.png">
+        <img src="./images/5.png">
+    </div>
+</body>
+<script>
+    window.onload = function(){
+        var r = 320;
+        var imgNodes = document.querySelectorAll("img");
+
+        document.onmousemove = function(event){
+            event = event || window.event;
+            
+            for(var i=0 ; i<imgNodes.length ; i++){
+                var a = imgNodes[i].getBoundingClientRect().left + imgNodes[i].offsetWidth/2 - event.clientX;
+                var b = imgNodes[i].getBoundingClientRect().top + imgNodes[i].offsetHeight/2 - event.clientY;
+                var c = Math.sqrt(a*a+b*b);
+
+                if(c>=r){
+                    c=r;
+                }
+
+                imgNodes[i].style.width = 128 - c*0.2 + "px";
+            }
+        }
+    }
+</script>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        html,body{
+            height:100%;
+            /* overflow:hidden; */
+        }
+        #wrap{
+            position:absolute;
+            left:200px;
+            top:200px;
+            background: pink;
+        }
+        #inner1{
+            position:absolute;
+            left:150px;
+            top:150px;
+            background: deeppink;
+        }
+        div{
+            width:200px;
+            height:200px;
+        }
+    </style>
+</head>
+<body  style="height:3000px;width:3000px">
+    <div id="wrap">wrap
+        <div id="inner1">inner1</div>
+    </div>
+</body>
+<script>
+    window.onscroll = function(){
+        // 滚动条滚动时，元素滚动的距离
+        var L = document.documentElement.scrollLeft || document.body.scrollLeft;
+        var T = document.documentElement.scrollTop || document.body.scrollTop;
+
+        console.log(L,T);
+    }
+</script>
+</html>
